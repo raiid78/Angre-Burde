@@ -1,3 +1,35 @@
+//string data type 
+var color = "red"; 
+
+//number data type 
+var score = 0; 
+
+//boolean values 
+var happy = true; 
+
+//null data type 
+var color = null; 
+
+//undefined data type 
+var fruit; 
+
+//array data structure 
+var colors = ["pink", "yellow", "green", "purple"]
+//console.log(colors)
+
+colors.push("magenta"); 
+
+
+
+colors.pop(); 
+console.log(colors);
+
+
+//arrays inside array
+var fruits = [["apple", "mango"], ["pear", "cherry", "banana"], ["strawberry"]]
+
+
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,6 +39,9 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
+var gameState = "OnSling";
+
+
 
 
 function preload() {
@@ -69,16 +104,20 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    
+    if(gameState !== "launched"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launched";
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+        //slingshot.attach(bird.body);
     }
 }
